@@ -10,6 +10,7 @@ const getAllJobs = async (req, res) => {
 };
 const createJob = async (req, res) => {
   try {
+    
     const job = await jobModel.create(req.body);
     res.status(201).json({ job });
   } catch (err) {

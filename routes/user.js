@@ -5,7 +5,8 @@ const {
   getAllUsers,
   createUser,
   getSingleUser,
-  getAlljoinedCommunities,
+
+  getUserBanner,
   /* updateUser,
   deleteUser, */
 } = require("../controllers/userController");
@@ -15,6 +16,7 @@ router.route("/").post(createUser);
 router
   .route("/:id")
   .get(getSingleUser) /* .post(updateUser).delete(deleteUser) */;
-router.route("/:id/communities/").get(getAlljoinedCommunities);
+
+router.route("/:id/banner").get(getUserBanner);
 
 module.exports = router;
