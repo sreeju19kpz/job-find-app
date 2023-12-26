@@ -27,9 +27,10 @@ const getSingleUser = async (req, res) => {
 
 const getUserBanner = async (req, res) => {
   try {
-    const user = await userModel.findOne({ _id: req.params.id });
-    const { dp, name } = user;
-    res.status(200).json({ dp, name });
+    const user = await userModel.findOne({ _id: req.user.userId });
+    const { dp, name, coverImg } = user;
+
+    res.status(200).json({ dp, name, coverImg });
   } catch (err) {
     res.status(500).json({ msg: err });
   }
@@ -39,6 +40,5 @@ module.exports = {
   getAllUsers,
   createUser,
   getSingleUser,
-
   getUserBanner,
 };

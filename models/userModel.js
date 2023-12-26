@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  coverImg: {
+    type: String,
+    required: false,
+  },
   followers: {
     type: Array,
     required: false,

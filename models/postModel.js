@@ -7,12 +7,12 @@ const postSchema = new mongoose.Schema({
   },
   authorId: {
     type: mongoose.Types.ObjectId,
-    ref: "userModel",
+    ref: "users",
     required: true,
   },
   communityId: {
     type: mongoose.Types.ObjectId,
-    ref: "communityModel",
+    ref: "communities",
     required: false,
   },
   description: {
@@ -20,10 +20,6 @@ const postSchema = new mongoose.Schema({
     required: true,
   },
   likes: {
-    type: Array,
-    required: false,
-  },
-  comments: {
     type: Array,
     required: false,
   },

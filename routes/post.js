@@ -7,20 +7,26 @@ const {
   getSinglePost,
   getPostBanner,
   likePost,
-  getLikes,
   getCommentsCount,
-  getAllComments,
+  getAllPostsFromUser,
+  getAllPostsFromCommunity,
+  getAllPostsForUser,
+  getIsLiked,
   /* updatePost,
   deletePost, */
 } = require("../controllers/postController");
 
-router.route("/all").get(getAllPosts);
 router.route("/").post(createPost);
+router.route("/all").get(getAllPosts);
+router.route("/feed/all").get(getAllPostsForUser);
+router.route("/community/:id").get(getAllPostsFromCommunity);
+router.route("/user/all").get(getAllPostsFromUser);
 router
   .route("/:id")
   .get(getSinglePost) /* .post(updatePost).delete(deletePost) */;
 router.route("/:id/banner").get(getPostBanner);
-router.route("/:id/likes/:uid").get(getLikes).put(likePost);
-router.route("/:id/comments/").get(getAllComments);
+router.route("/:id/like").put(likePost);
+router.route("/:id/isliked").get(getIsLiked);
 router.route("/:id/comments/count").get(getCommentsCount);
+
 module.exports = router;

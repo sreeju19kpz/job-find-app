@@ -4,9 +4,8 @@ const router = express.Router();
 const {
   getAllCommunities,
   getSingleCommunity,
-  getCommunityBanner,
+
   getAllJoinedCommunities,
-  getCommunityPosts,
 
   joinCommunity,
   discoverCommunity,
@@ -18,13 +17,13 @@ const {
 
 router.route("/all").get(getAllCommunities);
 router.route("/").post(createCommunity);
+router.route("/joined").get(getAllJoinedCommunities);
+router.route("/discover").get(discoverCommunity);
 router.route("/:id").get(getSingleCommunity);
 /*   .post(updateCommunity)
   .delete(deleteCommunity); */
-router.route("/:id/banner").get(getCommunityBanner);
-router.route("/joined/:uid").get(getAllJoinedCommunities);
-router.route("/newto/:uid").get(discoverCommunity);
+
 router.route("/:id/ismember").get(memberVerify);
-router.route("/:id/posts").get(getCommunityPosts);
+
 router.route("/:id/join").put(joinCommunity);
 module.exports = router;

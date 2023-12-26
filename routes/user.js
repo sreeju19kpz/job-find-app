@@ -13,6 +13,7 @@ const {
 
 router.route("/all").get(getAllUsers);
 router.route("/").post(createUser);
+router.route("/users/user/banner").get(getUserBanner);
 router
   .route("/:id")
   .get(getSingleUser) /* .post(updateUser).delete(deleteUser) */;

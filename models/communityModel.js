@@ -28,7 +28,7 @@ const communitySchema = new mongoose.Schema(
     },
     createdBy: {
       type: mongoose.Types.ObjectId,
-      ref: "userModel",
+      ref: "users",
     },
   },
   { timestamps: true }

@@ -6,7 +6,9 @@ const internships = require("./routes/internships");
 const communities = require("./routes/community");
 const users = require("./routes/user");
 const posts = require("./routes/post");
+const comments = require("./routes/comment");
 const authRout = require("./routes/auth");
+
 const authenticateUser = require("./middleware/authentication");
 const connectDB = require("./db/connect");
 const cors = require("cors");
@@ -21,6 +23,7 @@ app.use("/api/v1/internships", authenticateUser, internships);
 app.use("/api/v1/communities", authenticateUser, communities);
 app.use("/api/v1/users", authenticateUser, users);
 app.use("/api/v1/posts", authenticateUser, posts);
+app.use("/api/v1/comments", authenticateUser, comments);
 
 const start = async () => {
   try {
