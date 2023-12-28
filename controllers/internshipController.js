@@ -1,13 +1,20 @@
 const internModel = require("../models/internshipModel");
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 const getAllInternships = async (req, res) => {
   try {
     const allInternships = await internModel.find({});
-    res.status(200).json(allInternships.map((item) => item._id));
+    res.status(200).json(allInternships);
   } catch (err) {
     res.status(500).json({ msg: err });
   }
 };
+
 const createInternship = async (req, res) => {
   try {
     const internship = await internModel.create(req.body);
@@ -16,6 +23,7 @@ const createInternship = async (req, res) => {
     res.status(500).json({ msg: err });
   }
 };
+
 const getSingleInternship = async (req, res) => {
   try {
     const internship = await internModel.findOne({ _id: req.params.id });
@@ -29,6 +37,7 @@ const getSingleInternship = async (req, res) => {
     res.status(500).json({ msg: err });
   }
 };
+
 const getInternshipBanner = async (req, res) => {
   try {
     const internship = await internModel.findOne({ _id: req.params.id });

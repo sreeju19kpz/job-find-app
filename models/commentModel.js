@@ -1,15 +1,6 @@
 const { default: mongoose } = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
-  /*   type: {
-    type: String,
-    required: true,
-  },
-  replyTo: {
-    type: mongoose.Types.ObjectId,
-    ref: "users",
-    required: false,
-  }, */
   postId: {
     type: mongoose.Types.ObjectId,
     ref: "posts",

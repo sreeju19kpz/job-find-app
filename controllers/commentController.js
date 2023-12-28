@@ -1,5 +1,11 @@
 const commentModel = require("../models/commentModel");
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 const postComment = async (req, res) => {
   try {
     req.body.user = req.user.userId;
@@ -12,6 +18,7 @@ const postComment = async (req, res) => {
     res.status(200).json(nComment);
   } catch (err) {}
 };
+
 const getAllCommentsFromPost = async (req, res) => {
   try {
     const comments = await commentModel
