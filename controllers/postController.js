@@ -3,6 +3,12 @@ const userModel = require("../models/userModel");
 const communityModel = require("../models/communityModel");
 const { post } = require("../routes/jobs");
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 const getAllPosts = async (req, res) => {
   try {
     const allPosts = await postModel.find({});
@@ -42,7 +48,11 @@ const createPost = async (req, res) => {
   req.body.authorId = req.user.userId;
   try {
     const post = await postModel.create(req.body);
-    res.status(201).json({ post });
+    const rPost = await postModel
+      .findOne({ _id: post._id.toString() })
+      .populate("authorId", ["name", "dp", "_id"])
+      .populate("communityId", ["name", "_id"]);
+    res.status(201).json(rPost);
   } catch (err) {
     res.status(500).json({ msg: err });
   }
@@ -103,21 +113,15 @@ const getAllPostsFromCommunity = async (req, res) => {
   }
 };
 const getAllPostsForUser = async (req, res) => {
+  await sleep(1000);
   try {
     const groups = await communityModel.find({
       members: { $in: req.user.userId },
     });
     const idGroups = groups.map((item) => item._id);
-    const users = await userModel.find({
-      followers: { $in: req.user.userId },
-    });
-    const idUsers = users.map((item) => item._id);
     const rPosts = await postModel
       .find({
-        $or: [
-          { authorId: { $in: idUsers } },
-          { communityId: { $in: idGroups } },
-        ],
+        communityId: { $in: idGroups },
       })
       .populate("authorId", ["name", "dp", "_id"])
       .populate("communityId", ["name", "_id"]);

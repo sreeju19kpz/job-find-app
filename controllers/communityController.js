@@ -1,5 +1,10 @@
 const communityModel = require("../models/communityModel");
-const userModel = require("../models/userModel");
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 
 const getAllCommunities = async (req, res) => {
   try {
@@ -11,6 +16,7 @@ const getAllCommunities = async (req, res) => {
   }
 };
 const getAllJoinedCommunities = async (req, res) => {
+  await sleep(1000);
   try {
     const allCommunities = await communityModel.find({
       members: { $in: req.user.userId },
@@ -124,9 +130,7 @@ module.exports = {
   getAllCommunities,
   getAllJoinedCommunities,
   getSingleCommunity,
-
   memberVerify,
-
   joinCommunity,
   discoverCommunity,
   createCommunity,

@@ -19,10 +19,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  followers: {
-    type: Array,
-    required: false,
-  },
   email: {
     type: String,
     required: true,

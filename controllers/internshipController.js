@@ -7,6 +7,7 @@ function sleep(ms) {
 }
 
 const getAllInternships = async (req, res) => {
+  await sleep(1000);
   try {
     const allInternships = await internModel.find({});
     res.status(200).json(allInternships);

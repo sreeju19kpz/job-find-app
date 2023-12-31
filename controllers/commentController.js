@@ -20,6 +20,7 @@ const postComment = async (req, res) => {
 };
 
 const getAllCommentsFromPost = async (req, res) => {
+  await sleep(1000);
   try {
     const comments = await commentModel
       .find({ postId: req.params.id }, { user: 1, comment: 1, _id: 0 })

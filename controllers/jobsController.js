@@ -1,6 +1,13 @@
 const jobModel = require("../models/jobModel");
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 const getAllJobs = async (req, res) => {
+  await sleep(1000);
   try {
     const allJobs = await jobModel.find({});
     res.status(200).json(allJobs);
